@@ -1,5 +1,6 @@
 package com.gluizdev.api_helpdesk.model;
 
+import com.gluizdev.api_helpdesk.dto.DadosCadastroUsuario;
 import com.gluizdev.api_helpdesk.enums.PerfilUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -43,5 +44,12 @@ public class Usuario {
     @PrePersist
     public void prePersist() {
         this.dataCriacao = LocalDateTime.now();
+    }
+
+    public Usuario(DadosCadastroUsuario dadosCadastroUsuario) {
+        this.nome = dadosCadastroUsuario.nome();
+        this.email = dadosCadastroUsuario.email();
+        this.senha = dadosCadastroUsuario.senha();
+        this.perfil = dadosCadastroUsuario.perfilUsuario();
     }
 }
