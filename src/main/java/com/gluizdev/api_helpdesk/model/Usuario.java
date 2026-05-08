@@ -1,5 +1,6 @@
 package com.gluizdev.api_helpdesk.model;
 
+import com.gluizdev.api_helpdesk.dto.DadosAtualizarUsuario;
 import com.gluizdev.api_helpdesk.dto.DadosCadastroUsuario;
 import com.gluizdev.api_helpdesk.enums.PerfilUsuario;
 import jakarta.persistence.*;
@@ -51,5 +52,17 @@ public class Usuario {
         this.email = dadosCadastroUsuario.email();
         this.senha = dadosCadastroUsuario.senha();
         this.perfil = dadosCadastroUsuario.perfilUsuario();
+    }
+
+    public void alterarDados(DadosAtualizarUsuario dadosAtualizarUsuario) {
+        if (dadosAtualizarUsuario.nome() != null) {
+            this.nome = dadosAtualizarUsuario.nome();
+        }
+        if (dadosAtualizarUsuario.email() != null) {
+            this.email = dadosAtualizarUsuario.email();
+        }
+        if (dadosAtualizarUsuario.senha() != null) {
+            this.senha = dadosAtualizarUsuario.senha();
+        }
     }
 }
