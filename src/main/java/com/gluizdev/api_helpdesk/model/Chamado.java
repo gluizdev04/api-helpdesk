@@ -1,5 +1,6 @@
 package com.gluizdev.api_helpdesk.model;
 
+import com.gluizdev.api_helpdesk.dto.DadosCadastroChamado;
 import com.gluizdev.api_helpdesk.enums.PrioridadeChamado;
 import com.gluizdev.api_helpdesk.enums.StatusChamado;
 import jakarta.persistence.*;
@@ -53,5 +54,12 @@ public class Chamado {
     @PreUpdate
     public void preUpdate() {
         this.dataAtualizacao = LocalDateTime.now();
+    }
+
+    public Chamado(DadosCadastroChamado dto) {
+        this.titulo = dto.titulo();
+        this.descricao = dto.descricao();
+        this.prioridade = dto.prioridade();
+        this.status = StatusChamado.ABERTO;
     }
 }
