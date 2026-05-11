@@ -2,6 +2,7 @@ package com.gluizdev.api_helpdesk.service;
 
 import com.gluizdev.api_helpdesk.dto.DadosAtualizarUsuario;
 import com.gluizdev.api_helpdesk.dto.DadosCadastroUsuario;
+import com.gluizdev.api_helpdesk.dto.DadosDetalhamentoUsuario;
 import com.gluizdev.api_helpdesk.dto.DadosListagemUsuarios;
 import com.gluizdev.api_helpdesk.model.Usuario;
 import com.gluizdev.api_helpdesk.repository.UsuarioRepository;
@@ -31,5 +32,14 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.getReferenceById(dadosAtualizarUsuario.id());
         usuario.alterarDados(dadosAtualizarUsuario);
         return usuario;
+    }
+
+    public void deletarUsuario(Long id) {
+        usuarioRepository.delete(usuarioRepository.getReferenceById(id));
+    }
+
+    public DadosDetalhamentoUsuario buscarPorId(Long id) {
+        var usuario = usuarioRepository.getReferenceById(id);
+        return new DadosDetalhamentoUsuario(usuario);
     }
 }

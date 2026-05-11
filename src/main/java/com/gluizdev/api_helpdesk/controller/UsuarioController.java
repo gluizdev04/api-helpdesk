@@ -47,8 +47,21 @@ public class UsuarioController {
 
     @PutMapping
     @Transactional
-    public ResponseEntity atualizarUsuario(DadosAtualizarUsuario dadosAtualizarUsuario) {
+    public ResponseEntity atualizarUsuario(@RequestBody DadosAtualizarUsuario dadosAtualizarUsuario) {
         var usuario = usuarioService.atualizarUsuario(dadosAtualizarUsuario);
         return ResponseEntity.ok(new DadosDetalhamentoUsuario(usuario));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deletarUsuario(@PathVariable Long id) {
+        usuarioService.deletarUsuario(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity buscarUsuarioPorId(@PathVariable Long id) {
+        var usuario = usuarioService.buscarPorId(id);
+        return ResponseEntity.ok(usuario);
     }
 }

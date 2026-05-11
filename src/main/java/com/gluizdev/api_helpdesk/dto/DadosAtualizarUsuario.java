@@ -1,6 +1,8 @@
 package com.gluizdev.api_helpdesk.dto;
 
-public record DadosAtualizarUsuario(Long id,
+import jakarta.validation.constraints.NotNull;
+
+public record DadosAtualizarUsuario(@NotNull Long id,
                                     String nome,
                                     String email,
                                     String senha) {
