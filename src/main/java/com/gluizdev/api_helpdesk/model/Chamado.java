@@ -1,5 +1,6 @@
 package com.gluizdev.api_helpdesk.model;
 
+import com.gluizdev.api_helpdesk.dto.DadosAtualizarChamado;
 import com.gluizdev.api_helpdesk.dto.DadosCadastroChamado;
 import com.gluizdev.api_helpdesk.enums.PrioridadeChamado;
 import com.gluizdev.api_helpdesk.enums.StatusChamado;
@@ -61,5 +62,24 @@ public class Chamado {
         this.descricao = dto.descricao();
         this.prioridade = dto.prioridade();
         this.status = StatusChamado.ABERTO;
+    }
+
+
+    public void atualizarDados(DadosAtualizarChamado dadosAtualizarChamado) {
+        if (dadosAtualizarChamado.titulo() != null) {
+            this.titulo = dadosAtualizarChamado.titulo();
+        }
+
+        if (dadosAtualizarChamado.descricao() != null) {
+            this.descricao = dadosAtualizarChamado.descricao();
+        }
+
+        if (dadosAtualizarChamado.status() != null) {
+            this.status = dadosAtualizarChamado.status();
+        }
+
+        if (dadosAtualizarChamado.prioridade() != null) {
+            this.prioridade = dadosAtualizarChamado.prioridade();
+        }
     }
 }

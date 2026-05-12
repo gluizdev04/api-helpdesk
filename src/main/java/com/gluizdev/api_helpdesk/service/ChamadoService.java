@@ -1,9 +1,14 @@
 package com.gluizdev.api_helpdesk.service;
 
+import com.gluizdev.api_helpdesk.dto.DadosAtualizarChamado;
 import com.gluizdev.api_helpdesk.dto.DadosCadastroChamado;
+import com.gluizdev.api_helpdesk.dto.DadosDetalhamentoChamado;
+import com.gluizdev.api_helpdesk.dto.DadosListagemChamados;
 import com.gluizdev.api_helpdesk.model.Chamado;
 import com.gluizdev.api_helpdesk.repository.ChamadoRepository;
 import com.gluizdev.api_helpdesk.repository.UsuarioRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,5 +27,24 @@ public class ChamadoService {
         var chamado = new Chamado(dto);
         chamado.setUsuario(usuarioEncontrado);
         return chamadoRepository.save(chamado);
+    }
+
+    public Page<DadosListagemChamados> exibirUsuarios(Pageable paginacao) {
+        return chamadoRepository.findAll(paginacao).map(DadosListagemChamados::new);
+    }
+
+    public Chamado atualizarChamado(DadosAtualizarChamado dadosAtualizarChamado) {
+        var chamado = chamadoRepository.getReferenceById(dadosAtualizarChamado.id());
+        chamado.atualizarDados(dadosAtualizarChamado);
+        return chamado;
+    }
+
+    public void deletarChamado(Long id) {
+        chamadoRepository.deleteById(id);
+    }
+
+    public DadosDetalhamentoChamado chamadoPorId(Long id) {
+        var chamado = chamadoRepository.getReferenceById(id);
+        return new DadosDetalhamentoChamado(chamado);
     }
 }
