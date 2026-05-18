@@ -1,5 +1,7 @@
 package com.gluizdev.api_helpdesk.model;
 
+import com.gluizdev.api_helpdesk.dto.DadosAtualizarComentario;
+import com.gluizdev.api_helpdesk.dto.DadosCadastroComentario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,5 +35,15 @@ public class Comentario {
     @PrePersist
     public void prePersist() {
         this.dataCriacao = LocalDateTime.now();
+    }
+
+    public Comentario(DadosCadastroComentario dadosCadastroComentario) {
+        this.texto = dadosCadastroComentario.texto();
+    }
+
+    public void atualizarDados(DadosAtualizarComentario dadosAtualizarComentario) {
+        if (dadosAtualizarComentario.texto() != null) {
+            this.texto = dadosAtualizarComentario.texto();
+        }
     }
 }
