@@ -1,4 +1,4 @@
-package com.gluizdev.api_helpdesk.infra;
+package com.gluizdev.api_helpdesk.infra.exception;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.http.ResponseEntity;
